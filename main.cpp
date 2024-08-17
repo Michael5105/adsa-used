@@ -45,10 +45,37 @@ string addition(string s1, string s2, int a){
 }
  
     
+string substration(string s1, string s2, int a){
+    makesame(s1, s2);  
+
+    string diff;
+    int c = 0;  
+
+    for(int i = s1.length() - 1; i >= 0; i--){
+        int difft = 0;
+
+        if(int(s1[i]-'0') - int(s2[i]-'0') - c < 0){
+            difft = int(s1[i] - '0') - int(s2[i] - '0') + a - c;
+            c = 1;
+        }
+
+        else{
+            difft = int(s1[i] - '0') - int(s2[i] - '0') - c;
+            c = 0;
+        }
+        diff.insert(0,to_string(difft));
+    }
+
+    
+    return diff;
+}
 
 
-
-
+//string multiplication(string s1, string s2, int a){
+//    makesame(s1, s2);  
+//    string mul;
+    
+//}
 
 
 
@@ -58,6 +85,6 @@ int main(int argc, char*argv[]){
 
     cin >> s1 >> s2 >> a;
 
-    cout<< addition(s1,s2,a) << endl;
+    cout<< substration(s1,s2,a) << endl;
     return 0;
 }
