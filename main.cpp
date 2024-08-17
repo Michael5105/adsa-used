@@ -71,11 +71,41 @@ string substration(string s1, string s2, int a){
 }
 
 
-//string multiplication(string s1, string s2, int a){
-//    makesame(s1, s2);  
-//    string mul;
+string multiplication(string s1, string s2, int a){
+    makesame(s1, s2);  
+    string mul;
     
-//}
+    for(int i = s1.length() - 1; i >= 0; i--){
+            string multi_t = "";
+            int c = 0;
+
+        for(int j = s2.length() - 1; j >= 0; j--){
+            int multi_s = 0;
+
+            if(int(s2[j]-'0')*int(s1[i]-'0') + c>= a){
+                multi_s = (int(s2[j]-'0')*int(s1[i]-'0') + c) %a;
+                c = (int(s2[j]-'0')*int(s1[i]-'0') + c - multi_s) / a; 
+            }
+            else{
+                multi_s=(int(s2[j]-'0')*int(s1[i]-'0') + c);
+                c = 0;
+            }
+            multi_t.insert(0,to_string(multi_s));
+        }
+        if (c != 0){
+            multi_t.insert(0,to_string(c));
+        }
+        for(int k = 0; k < int(s1.length()-1)-i;k++){
+            multi_t.append("0");
+        }
+        mul = addition(mul,multi_t,a);
+    }
+    while (mul.length() > 1 && mul[0] == '0') {
+        mul.erase(0, 1);
+    }
+    return mul;
+
+}
 
 
 
@@ -85,6 +115,6 @@ int main(int argc, char*argv[]){
 
     cin >> s1 >> s2 >> a;
 
-    cout<< substration(s1,s2,a) << endl;
+    cout<<addition(s1,s2,a)<<" "<<multiplication(s1,s2,a) << endl;
     return 0;
 }
