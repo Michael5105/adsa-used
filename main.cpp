@@ -136,6 +136,13 @@ string karatsuba(string s1, string s2, int a){
     }
 
     ans = addition(addition(p2, p3, a), p0 , a);
+
+    int pos = ans.find_first_not_of('0');
+    if (pos != string::npos) {
+        ans = ans.substr(pos);
+    } else {
+        ans = "0";
+    }
     return ans;
 }
 
