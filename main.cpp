@@ -107,7 +107,37 @@ string multiplication(string s1, string s2, int a){
 
 }
 
+string karatsuba(string s1, string s2, int a){
+    makesame(s1, s2);
+    string ans;
+    
+    int length = s1.length();
+    if(length <= 3){
+        return multiplication(s1,s2,a);
+    }
 
+    string a1 = s1.substr(0, length/2);
+    string a0 = s1.substr(length/2,length-length/2);
+    string b1 = s2.substr(0,length/2);
+    string b0 = s2.substr(length/2,length-length/2);
+
+    string p0 = karatsuba(a0, b0, a);
+    string p1 = karatsuba(addition(a1, a0, a), addition(b1, b0, a), a);
+    string p2 = karatsuba(a1, b1, a);
+    string p3 = substration(p1, addition(p2, p0, a), a);
+
+    for(int i = 0; i < 2*(length-length/2);i++){
+        p2.append("0");
+
+    }
+
+    for(int i = 0; i < (length-length/2); i++){
+        p3.append("0");
+    }
+
+    ans = addition(addition(p2, p3, a), p0 , a);
+    return ans;
+}
 
 int main(int argc, char*argv[]){
     string s1, s2;
@@ -115,6 +145,6 @@ int main(int argc, char*argv[]){
 
     cin >> s1 >> s2 >> a;
 
-    cout<<addition(s1,s2,a)<<" "<<multiplication(s1,s2,a) << endl;
+    cout<<addition(s1,s2,a)<<" "<<karatsuba(s1,s2,a) << endl;
     return 0;
 }
